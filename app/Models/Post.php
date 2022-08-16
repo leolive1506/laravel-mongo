@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Post extends ModelMongo
 {
     // use HasFactory;
-    protected $collection = 'blog_posts';
+    protected $collection = 'posts';
     protected $fillable = ['nome'];
 }
