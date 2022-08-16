@@ -9,4 +9,5 @@ class Post extends ModelMongo
 {
     // use HasFactory;
     protected $collection = 'blog_posts';
+    protected $fillable = ['nome'];
 }
