@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\LogController;
+use App\Http\Controllers\LogTypeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::resource('posts', PostController::class);
+Route::resource('logs', LogController::class);
+Route::resource('log-types', LogTypeController::class);
+

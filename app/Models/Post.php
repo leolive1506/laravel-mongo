@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends ModelMongo
 {
-    // use HasFactory;
+    use HasFactory;
+
     protected $collection = 'posts';
+    protected $guarded = ['id'];
     protected $fillable = ['nome'];
 }
