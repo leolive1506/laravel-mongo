@@ -9,12 +9,12 @@ class LogController extends Controller
 {
     public function index()
     {
-        return Log::with('logType')->get();
+        return response()->json(Log::with('logType')->get());
     }
 
     public function show(Log $log)
     {
-        return $log;
+        return response()->json($log);
     }
 
     public function store(Request $request)
@@ -22,7 +22,7 @@ class LogController extends Controller
         $data = $request->all();
         $data['body'] = json_encode($data['body']);
 
-        return Log::create($data);
+        return response()->json(Log::create($data));
     }
 
     public function update(Request $request, Log $log)

@@ -74,4 +74,3 @@ db.pessoas.find()
 // dentro providers
 Jenssegers\Mongodb\MongodbServiceProvider::class,
 ```
-
