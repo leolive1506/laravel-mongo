@@ -55,6 +55,16 @@ DB_USERNAME=
 DB_PASSWORD=
 ```
 
+- env.testing
+  - Database somente para teste com propósito de não afetar app principal
+```dotenv
+DB_CONNECTION=mongodb
+DB_HOST=127.0.0.1
+DB_PORT=27017
+DB_DATABASE=your_database_test
+DB_USERNAME=
+DB_PASSWORD=
+``
 
 # Dicas mongodb
 ```sh
@@ -86,3 +96,5 @@ db.pessoas.find()
 ```
 
 
+# OBS
+- Para rodar os teste via interface phpStorm, necessário configurar o template de teste no projeto
