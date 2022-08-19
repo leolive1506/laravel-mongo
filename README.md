@@ -66,6 +66,11 @@ DB_USERNAME=
 DB_PASSWORD=
 ```
 
+# comandos
+```shell
+php artisan migrate
+```
+
 # Dicas mongodb
 ```sh
 # acessar terminal
