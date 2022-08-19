@@ -18,11 +18,10 @@ class LogTest extends TestCase
         $this->createLogFactory($qtdLogs);
 
         $logs = Log::where('log_type_id', LogType::INFO)->get();
-
         $this->assertEquals($qtdLogs, $logs->count());
     }
 
-    public function testeIndexMethod()
+    public function testIndexMethod()
     {
         $this->createLogFactory();
 
@@ -33,7 +32,7 @@ class LogTest extends TestCase
         $this->assertCount(1, $response);
     }
 
-    public function testeShowMethod()
+    public function testShowMethod()
     {
         $log = $this->createLogFactory()->first();
 
@@ -44,7 +43,7 @@ class LogTest extends TestCase
         $this->assertEquals($log->id, $response->_id);
     }
 
-    public function testeStoreMethod()
+    public function testStoreMethod()
     {
         $log = [
             'body' => ['rota' => 'localhost:8000/api/test/rota'],
@@ -61,7 +60,7 @@ class LogTest extends TestCase
         $this->assertEquals($logDatabase->id, $response->_id);
     }
 
-    public function testeUpdateMethod()
+    public function testUpdateMethod()
     {
         $log = $this->createLogFactory()->first();
 
@@ -85,7 +84,7 @@ class LogTest extends TestCase
         $this->assertEquals($log->breadcrumb, $breadcrumb);
     }
 
-    public function testeDestroyMethod()
+    public function testDestroyMethod()
     {
         $log = $this->createLogFactory()->first();
 
@@ -95,6 +94,29 @@ class LogTest extends TestCase
         $countLogs = Log::all()->count();
 
         $this->assertEquals(0, $countLogs);
+    }
+
+    public function testStoreManyLogsViaEndpoint()
+    {
+        $qtdLogs = 10000;
+
+        for ($i = 1; $i <= $qtdLogs; $i++) {
+            $log = [
+                'body' => ['rota' => 'localhost:8000/api/test/rota' . $i],
+                'log_type_id' => LogType::INFO,
+                'breadcrumb' => 'user #' . random_int(1, 10000000000) . ' created transaction',
+            ];
+
+            $response = $this->post('/api/logs/', $log);
+            $response->assertOk();
+            $response = json_decode($response->getContent());
+
+            $logDatabase = Log::orderBy('_id', 'desc')->first();
+            $this->assertEquals($logDatabase->id, $response->_id);
+        }
+
+        $logsCount = Log::all()->count();
+        $this->assertEquals($qtdLogs, $logsCount);
     }
 
     public function createLogFactory($qtd = 1)
